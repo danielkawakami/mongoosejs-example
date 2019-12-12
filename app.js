@@ -75,6 +75,37 @@ app.post('/book2', function(req, res){
     })
 })
 
+app.put('/book/:id', function(req,res){
+    Book.findOneAndUpdate({
+        _id: req.params.id
+    }, {$set:{title: req.body.title}},
+        {upsert:true,
+         useFindAndModify: false},
+        function(err, newBook) {
+            if(err) {
+                console.log('error occured');
+            } else {
+                console.log(newBook);
+                res.send(newBook);
+            }
+        })
+})
+
+app.delete('/book/:id', function(req, res){
+    Book.findOneAndRemove({
+        _id: req.params.id
+    }, 
+    {useFindAndModify: false},
+    function(err,book) {
+        if(err) {
+            console.log('error deleting');
+        } else {
+            console.log(book);
+            res.status(204);
+        }
+    })
+})
+
 app.listen(port, function() {
     console.log('app listenin on port ' + port);
 });
