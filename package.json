@@ -1,0 +1,24 @@
+{
+  "name": "mongoosejs-example",
+  "version": "1.0.0",
+  "description": "Projeto para entender como integrar aplicação NodeJS com MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielkawakami/mongoosejs-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielkawakami/mongoosejs-example/issues"
+  },
+  "homepage": "https://github.com/danielkawakami/mongoosejs-example#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.0"
+  }
+}
