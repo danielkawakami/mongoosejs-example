@@ -3,13 +3,16 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Book = require('./Book.model');
-
+var port = 8080;
 var db = 'mongodb://localhost/example';
 
 mongoose.connect(db, { useNewUrlParser:true,
                        useUnifiedTopology: true});
 
-var port = 8080;
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.get('/', function(req, res){
     res.send('happy to be here');
@@ -40,6 +43,34 @@ app.get('/books/:id', function(req, res){
         } else {
             console.log(book);
             res.json(book);
+        }
+    })
+})
+
+app.post('/book', function(req, res){
+    var newBook = new Book();
+    
+    newBook.title = req.body.title;
+    newBook.author = req.body.author;
+    newBook.category = req.body.category;
+
+    newBook.save(function(err, book){
+        if(err) {
+            res.send('error saving book');
+        } else {
+            console.log(book);
+            res.send(book);
+        }
+    })
+})
+
+app.post('/book2', function(req, res){
+    Book.create(req.body, function(err, book){
+        if(err) {
+            console.log('error saving book');
+        } else {
+            console.log(book);
+            res.send(book);
         }
     })
 })
